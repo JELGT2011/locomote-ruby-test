@@ -5,12 +5,12 @@ describe Tabletop do
  TABLE_SIZE = 5
  TABLE_MAX = TABLE_SIZE - 1
 
- it "can place the robot" do
+ it 'can place the robot' do
   tabletop.place(robot,0,0,:south)
   expect(robot.placed?).to be_true
  end
 
- it "can only be placed within a TABLE_SIZE x TABLE_SIZE area" do
+ it 'can only be placed within a TABLE_SIZE x TABLE_SIZE area' do
   expect(tabletop.place(robot,-1,0,:south)).to be_nil
   expect(robot.placed?).to be_false
   expect(tabletop.place(robot,0,-1,:south)).to be_nil
@@ -21,12 +21,12 @@ describe Tabletop do
   expect(robot.placed?).to be_false
  end
 
- it "can only face a valid direction" do
+ it 'can only face a valid direction' do
   expect(tabletop.place(robot,0,0,'abc')).to be_nil
   expect(robot.placed?).to be_false
  end
 
- it "prevents the robot falling off the edge" do
+ it 'prevents the robot falling off the edge' do
   tabletop.place(robot,0,0,:south)
   expect(robot.placed?).to be_true
   robot.move
