@@ -12,11 +12,13 @@ $ cd locomote-ruby-test
 $ ./bin/robot_sim example_a
 0,0,NORTH
 
-$ ./bin/robot_sim -v example_a
-Loading example_a...
-Placing at 0,0,NORTH
-Moving
-Output: 0,0,NORTH
+$ ./bin/run_examples
+Running example_a. Should output 0,1,NORTH
+0,1,NORTH
+Running example_b. Should output 0,0,WEST
+0,0,WEST
+Running example_c. Should output 3,3,NORTH
+3,3,NORTH
 ```
 
 The test files from the PDF are available as `example_{abc}` in the root of this repository.

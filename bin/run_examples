@@ -1,0 +1,14 @@
+#!/bin/bash
+
+BIN=$(dirname $0)
+BASE=$BIN/..
+
+echo "Running example_a. Should output 0,1,NORTH"
+$BIN/robot_sim $BASE/example_a
+
+echo "Running example_b. Should output 0,0,WEST"
+$BIN/robot_sim $BASE/example_b
+
+echo "Running example_c. Should output 3,3,NORTH"
+$BIN/robot_sim $BASE/example_c
+
