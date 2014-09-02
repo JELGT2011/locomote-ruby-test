@@ -1,0 +1,37 @@
+#!/usr/bin/env ruby
+require_relative '../lib/tabletop'
+require_relative '../lib/robot'
+
+def validate(lines)
+ lines.each_with_index do |line, index|
+  next if ["MOVE","LEFT","RIGHT","REPORT"].include? line
+  next if line =~ /^#.*/
+  next if line =~ /^PLACE \d+,\d+,(NORTH|EAST|WEST|SOUTH)$/
+  puts "Error: invalid input on line #{index+1}: #{line}"
+ end
+end
+
+def execute(lines)
+ tabletop = Tabletop.new
+ robot = Robot.new
+
+ lines.each do |line|
+  if line.start_with? "PLACE"
+   x,y,facing = line.sub('PLACE ','').split(',')
+   x = x.to_i
+   y = y.to_i
+   facing = facing.downcase.to_sym
+   tabletop.place(robot,x,y,facing)
+  end
+  robot.left if line == "LEFT"
+  robot.right if line == "RIGHT"
+  robot.move if line == "MOVE"
+  if line == "REPORT"
+   puts "#{robot.position[:x]},#{robot.position[:y]},#{robot.position[:facing].upcase}"
+  end
+ end
+end
+
+lines = File.read(ARGV[0]).split("\n")
+validate(lines)
+execute(lines)
