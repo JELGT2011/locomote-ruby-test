@@ -1,46 +1,30 @@
 class Robot
- DIRECTIONS = [:north, :east, :south, :west]
- attr_accessor :placed, :x, :y, :facing
-
- def initialize
- end
-
- def place(x, y, facing)
-  return unless DIRECTIONS.include?(facing)
-  @x = x
-  @y = y
-  @facing = facing
-  @placed = true
-  self
- end
+ attr_accessor :tabletop
 
  def left
   return unless placed?
-  @facing = DIRECTIONS[(DIRECTIONS.index(@facing)-1) % DIRECTIONS.length]
+  @tabletop.left(self)
   self
  end
 
  def right
   return unless placed?
-  @facing = DIRECTIONS[(DIRECTIONS.index(@facing)+1) % DIRECTIONS.length]
+  @tabletop.right(self)
   self
  end
 
  def move
   return unless placed?
-  @y += 1 if @facing == :north
-  @x += 1 if @facing == :east
-  @y -= 1 if @facing == :south
-  @x -= 1 if @facing == :west
+  @tabletop.move(self)
   self
  end
 
  def position
   return unless placed?
-  {x: x, y: y, facing: facing}
+  @tabletop.position
  end
 
  def placed?
-  !!@placed
+  !!@tabletop
  end
 end
